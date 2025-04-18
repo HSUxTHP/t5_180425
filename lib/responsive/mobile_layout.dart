@@ -10,7 +10,7 @@ class MobileLayout extends StatelessWidget {
       body: Column(
         children: [
           AspectRatio(
-            aspectRatio: 0.75,
+            aspectRatio: 1,
             child: SizedBox(
               width: double.infinity,
               child: GridView.builder(
@@ -37,22 +37,41 @@ class MobileLayout extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: ListView.builder(
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1,
+                // childAspectRatio: 1.0,
+                // mainAxisSpacing: 4.0,
+                // crossAxisSpacing: 4.0
+              ),
               itemCount: 10,
                 itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.all(4),
-                    color: Colors.red,
-                    child: Center(
-                      child: Text(
-                        'Item $index',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                  return AspectRatio(
+                    aspectRatio: 16/9,
+                    child: Container(
+                      margin: EdgeInsets.all(4),
+                      color: Colors.red,
                     ),
                   );
                 }
             ),
           )
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
         ],
       ),
     );
